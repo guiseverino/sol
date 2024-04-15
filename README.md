@@ -1,1 +1,1 @@
-# sol
+ .\venv-backend\Scripts\activate
