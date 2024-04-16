@@ -9,7 +9,7 @@ class Cliente(models.Model):
     logradouro = models.TextField(max_length=88)
     complemento = models.TextField(max_length=88)
     municipio = models.TextField(max_length=88)
-    uf = models.TextField(max_length=88)
+    uf = models.TextField(max_length=2)
     faturamento = models.DecimalField(max_digits=10, decimal_places=2)
     site=models.TextField(max_length=58)
     ddd = models.CharField(max_length=2, default='XX')
@@ -27,7 +27,7 @@ class Fornecedor(models.Model):
     logradouro = models.TextField(max_length=88)
     complemento = models.TextField(max_length=88)
     municipio = models.TextField(max_length=88)
-    uf = models.TextField(max_length=88)
+    uf = models.TextField(max_length=2)
     numero = models.TextField(max_length=6)
     ddd = models.CharField(max_length=2, default='XX')
     telefone = models.CharField(max_length=9, default='telefone')
@@ -40,13 +40,15 @@ class Fornecedor(models.Model):
 class Item(models.Model):
     nome_item = models.CharField(max_length=33,  unique=True)
     fornecedor = models.ManyToManyField(Fornecedor,through="Fornecimento")
+
     def __str__(self):
         return self.nome_item
 
 class Job(models.Model):
     cliente = models.ForeignKey(Cliente,on_delete=models.CASCADE)
     nome_job = models.TextField(max_length=200)
-    item = models.ManyToManyField(Item,through="ItemJob")
+    item = models.ManyToManyField(Item, through='ItemJob') 
+    itens = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True, related_name='itens', verbose_name='Itens')
     quantidade_item = models.IntegerField()
     data_inicio = models.DateField(default=datetime.datetime.now)
     data_termino = models.DateField(default=datetime.datetime.now)
@@ -55,7 +57,7 @@ class Job(models.Model):
     logradouro = models.TextField(max_length=88)
     complemento = models.TextField(max_length=88)
     municipio = models.TextField(max_length=88)
-    uf = models.TextField(max_length=88)
+    uf = models.TextField(max_length=2)
     numero = models.TextField(max_length=6)
     documento = models.FileField(upload_to='documentos/',default='none')
 

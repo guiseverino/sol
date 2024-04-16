@@ -22,13 +22,14 @@ class ItemSerializer(serializers.ModelSerializer):
 
 class JobSerializer(serializers.ModelSerializer):
     cliente = serializers.PrimaryKeyRelatedField(queryset=Cliente.objects.all()) 
+    item = ItemSerializer(many=True, read_only=True)
     class Meta:
         model = Job
-        fields = ("cliente","nome_job","item","data_inicio","data_termino","honorario","cep","logradouro","complemento","municipio","uf","numero","documento")
+        fields = ("id","cliente","nome_job","item","data_inicio","data_termino","honorario","cep","logradouro","complemento","municipio","uf","numero","documento")
 
 class ItemJobSerializer(serializers.ModelSerializer):
-   item = ItemSerializer()
-   job = JobSerializer()
+   item = serializers.PrimaryKeyRelatedField(queryset=Item.objects.all())
+   job = serializers.PrimaryKeyRelatedField(queryset=Job.objects.all())
    class Meta:
         model = ItemJob
         fields = ("item","job")

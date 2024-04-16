@@ -11,5 +11,11 @@ router.register("job",JobViewSet,basename="job")
 router.register("itemjob",ItemJobViewSet,basename="itemjob")
 router.register("fornecimento",FornecimentoViewSet,basename="fornecimento")
 # router.register("cotacao",CotacaoViewSet,basename="cotacao")
-urlpatterns = router.urls
+# urlpatterns = router.urls
+urlpatterns = [
+    path('itemjob/<int:pk>/add_item_to_job/', ItemJobViewSet.as_view({'post': 'add_item_to_job'}), name='add_item_to_job')
+]
+
+# Concatene as rotas padrão com as rotas personalizadas
+urlpatterns += router.urls
 
