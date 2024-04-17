@@ -14,7 +14,7 @@ class Cliente(models.Model):
     site=models.TextField(max_length=58)
     ddd = models.CharField(max_length=2, default='XX')
     telefone = models.CharField(max_length=9, default='telefone')
-    image = models.ImageField(upload_to='images/',default='none')
+
 
     def __str__(self):
         return f"{self.cnpj} - {self.razao_social}"

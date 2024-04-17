@@ -2,12 +2,10 @@ from rest_framework import serializers
 from .models import Cliente,Fornecedor,Item, Fornecimento,Job,ItemJob
 
 # AQUI TRANFORMA EM JSON 
-class ClienteSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(required=False)
-    
+class ClienteSerializer(serializers.ModelSerializer):    
     class Meta:
         model = Cliente 
-        fields = ("id","cnpj","razao_social","email","cep","logradouro","complemento","municipio","uf","faturamento","site","ddd","telefone","image")
+        fields = ("id","cnpj","razao_social","email","cep","logradouro","complemento","municipio","uf","faturamento","site","ddd","telefone")
 
 class FornecedorSerializer(serializers.ModelSerializer):
     class Meta:

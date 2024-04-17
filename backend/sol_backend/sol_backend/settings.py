@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+APPEND_SLASH=False
 # Application definition
 
 INSTALLED_APPS = [
@@ -52,6 +52,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 ROOT_URLCONF = 'sol_backend.urls'
 
@@ -124,9 +127,12 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT= BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
-CORS_ALLOWED_ORIGINS  = ['http://127.0.0.1:5173','http://localhost:5173']
+# CORS_ALLOWED_ORIGINS  = ['http://127.0.0.1:5173','http://localhost:5173']

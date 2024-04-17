@@ -26,12 +26,10 @@ class ItemJobViewSet(viewsets.ModelViewSet):
         item_id = request.data.get('item')
         try:
             # Recupera o objeto Job com base no ID fornecido na URL
-            job = Job.objects.get(pk=job_id)
-            
+            job = Job.objects.get(pk=job_id)            
             # Verifica se já existe um ItemJob com a mesma combinação de item e job
             if ItemJob.objects.filter(job=job, item_id=item_id).exists():
                 return Response({'error': 'This item is already assigned to this job.'}, status=status.HTTP_400_BAD_REQUEST)
-            
             # Cria uma nova associação entre o item e o job utilizando o modelo ItemJob
             item_job = ItemJob.objects.create(job=job, item_id=item_id)
             serializer = self.get_serializer(item_job)
